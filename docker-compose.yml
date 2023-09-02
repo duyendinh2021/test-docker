@@ -1,0 +1,22 @@
+version: '3.8'
+
+name: 'docker-permissions-test'
+
+services:
+    docker-permissions:
+        container_name: 'docker-permissions'
+        image: 'docker-permissions:0.1'
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                UID: '${UID}'
+                GID: '${GID}'
+                UNAME: '${UNAME_USER}'
+                GNAME: '${GNAME_USER}'
+                USER_PASSWORD: '${USER_PASSWORD}'
+        volumes:
+            - './data:/data:rw'
+        tty: true
+        stdin_open: true
+        restart: always
